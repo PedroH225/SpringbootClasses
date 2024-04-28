@@ -1,6 +1,7 @@
 package com.example.runnerz.run;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,13 @@ public class RunRepository {
         return jdbcClient.sql("select * from run")
                 .query(Run.class)
                 .list();
+    }
+
+    public Optional<Run> findById(Integer id) {
+        return jdbcClient.sql("SELECT id,title,started_on,completed_on,miles,locationn FROM Run WHERE id = :id")
+        .param("id",id)
+        .query(Run.class)
+        .optional();
     }
 
 }
