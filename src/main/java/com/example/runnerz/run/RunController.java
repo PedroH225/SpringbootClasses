@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -45,4 +46,11 @@ public class RunController {
     void create(@Valid @RequestBody Run run) {
         runRepository.create(run);
     }     
+
+    @ResponseStatus(HttpStatus.NO_CONTENT) 
+    @PutMapping("/{id}")
+    void update(@Valid @RequestBody Run run, @PathVariable Integer id) {
+        runRepository.update(run, id);
+
+    }
 }
